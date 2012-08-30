@@ -74,7 +74,8 @@ module Cinch
               owner = page.search("//div[@class='name']/a").inner_html
 
               # Get time
-              age = page.search("//span[@class='date']/abbr").text
+              age = page.search("//span[@class='date']/time")
+              age = age.first[:datetime] rescue age.text if age
               age = Time.parse(age) rescue nil
               age = age.strftime("%Y-%m-%d %H:%M") if age
 
