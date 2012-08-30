@@ -18,7 +18,7 @@ module Cinch
           @agent.max_history      = 0
         end
 
-        URI.extract(m.message.gsub(/git@/,'git://'), ["http", "https", "git"]).map do |link|
+        URI.extract(m.message.gsub(/git@(gist.github.com):/,'git://\1/'), ["http", "https", "git"]).map do |link|
           link=~/^(.*?)[:;,\)]?$/
           $1
         end.each do |link|
