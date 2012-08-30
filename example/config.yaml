@@ -1,0 +1,9 @@
+---
+connection:
+  :server: irc.freenode.net
+  :port: 6667
+  :nick: url-scraper
+  :channels:
+    - "#rvm-test"
+plugins:
+  "Cinch::Plugins::UrlScraper":
