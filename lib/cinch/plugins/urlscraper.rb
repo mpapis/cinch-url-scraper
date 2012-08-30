@@ -8,7 +8,6 @@ module Cinch
   module Plugins
     class UrlScraper
       include Cinch::Plugin
-      set :react_on, :channel
 
       listen_to :channel
       def listen(m)
@@ -19,9 +18,12 @@ module Cinch
           @agent.max_history      = 0
         end
 
-        URI.extract(m.message, ["http", "https"]) do |link|
+        URI.extract(m.message.gsub(/git@/,'git://'), ["http", "https", "git"]) do |link|
           # Fetch data
           begin
+            if git = link =~ /^git:\/\/(gist.github.com\/.*)\.git$/
+              link = "https://#{$1}"
+            end
             uri  = URI.parse(link)
             page = @agent.get(link)
           rescue Mechanize::ResponseCodeError
@@ -72,9 +74,15 @@ module Cinch
               age = Time.parse(page.search("//span[@class='date']/abbr").text)
               age = age.strftime("%Y-%m-%d %H:%M")
 
-              m.reply "Title: %s (at %s, %s on %s)" % [
-                title, uri.host, owner, age
-              ]
+              if git
+                m.reply "Title: %s (at %s, %s on %s), Url: %s" % [
+                  title, uri.host, owner, age, link
+                ]
+              else
+                m.reply "Title: %s (at %s, %s on %s)" % [
+                  title, uri.host, owner, age
+                ]
+              end
             when "pastie.org"
               # Get time
               age = Time.parse(page.search("//span[@class='typo_date']").text)
