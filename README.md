@@ -7,7 +7,7 @@ A Cinch plugin to get information about posted URLs.
 First install the gem by running:
 
 ```bash
-gem install cinch-url-scrapper
+gem install cinch-url-scraper
 ```
 
 Then load it in your bot:
