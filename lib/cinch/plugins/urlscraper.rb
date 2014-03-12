@@ -12,7 +12,7 @@ module Cinch
       set :help, <<-USAGE.gsub(/^ {6}/, '')
         If enabled, this plugin will return the title of the webpage that you or another user posts in the channel. For YouTube and IMDB there are special outputs for relevent information.
         Enable/Disable Usage:
-        - ~url [on/off]: This command will turn the URL Scraper on or off for the channel you use this command in.
+        - !url [on/off]: This command will turn the URL Scraper on or off for the channel you use this command in.
         USAGE
       
       def listen(m)
