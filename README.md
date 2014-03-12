@@ -19,6 +19,8 @@ require "cinch/plugins/urlscraper"
 bot = Cinch::Bot.new do
   configure do |c|
     c.plugins.plugins = [Cinch::Plugins::UrlScraper]
+    c.plugins.options[Cinch::Plugins::UrlScraper] = { enabled_channels: ["#Foo", "#Bar"] }
+
   end
 end
 
@@ -30,6 +32,11 @@ bot.start
 ```irc
 <url> # display url title / information
 ```
+
+```irc
+!url <on|off> # toggles URL scraping on and off for that channel
+```
+
 
 ## Example
 
