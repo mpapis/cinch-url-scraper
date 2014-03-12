@@ -1,3 +1,7 @@
+# source: http://subforge.org/projects/shreds/repository/entry/bot/cinch.rb#L396
+
+# @copyright (c) 2010-2012, Christoph Kappel <unexist@dorfelite.net>
+
 require "json"
 require "mechanize"
 
