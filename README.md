@@ -19,7 +19,8 @@ require "cinch/plugins/urlscraper"
 bot = Cinch::Bot.new do
   configure do |c|
     c.plugins.plugins = [Cinch::Plugins::UrlScraper]
-    c.plugins.options[Cinch::Plugins::UrlScraper] = { enabled_channels: ["#Foo", "#Bar"] } # This line is not required
+    # The following line is not required
+    c.plugins.options[Cinch::Plugins::UrlScraper] = { enabled_channels: ["#Foo", "#Bar"] } 
 
   end
 end
