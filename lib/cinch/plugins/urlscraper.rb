@@ -18,10 +18,12 @@ module Cinch
         Enable/Disable Usage:
         - !url [on/off]: This command will turn the URL Scraper on or off for the channel you use this command in.
         USAGE
+        
+      match /url (on|off)$/
       
       def listen(m)
         return if m.message.include? "nospoil"
-        return unless config[:enabled_channels].include?(m.channel.name)
+        return if config[:enabled_channels] && ! config[:enabled_channels].include?(m.channel.name)
         # Create mechanize agent
         if @agent.nil?
           @agent = Mechanize.new
@@ -130,31 +132,31 @@ module Cinch
             else
               m.reply "Title: %s (at %s)" % [ title, uri.host ] if title
             end
-        end
-      end
-
-  match /url (on|off)$/
-  
-  def execute(m, option)
-    begin
+          end
       
-      @url = option == "on"
-      
-      case option
-        when "on"
-          config[:enabled_channels] << m.channel.name
-        else
-          config[:enabled_channels].delete(m.channel.name)
+      def execute(m, option)
+         config[:enabled_channels] ||= []
+            
+            @url = option == "on"
+            
+            case option
+              when "on"
+                config[:enabled_channels] << m.channel.name
+              else
+                config[:enabled_channels].delete(m.channel.name)
+              end
+              
+              m.reply Format(:green, "URL Scraping for #{m.channel} is now #{@url ? 'enabled' : 'disabled'}!")
+              
+              @bot.debug("#{self.class.name} → #{config[:enabled_channels].inspect}");
+              
+              config[:enabled_channels]=nil if config[:enabled_channels]==[]
+              
+            rescue 
+              m.reply Format(:red, "Error: #{$!}")
+            end
+          end
         end
-        
-        m.reply Format(:green, "URL Scraping for #{m.channel} is now #{@url ? 'enabled' : 'disabled'}!")
-        
-        @bot.debug("#{self.class.name} → #{config[:enabled_channels].inspect}");
-        
-      rescue 
-        m.reply Format(:red, "Error: #{$!}")
       end
     end
-  end
-end
-end 
+  
