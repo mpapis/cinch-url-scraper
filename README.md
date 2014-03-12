@@ -18,7 +18,7 @@ require "cinch/plugins/urlscraper"
 
 bot = Cinch::Bot.new do
   configure do |c|
-    c.plugins.plugins = [Cinch::Plugins::UmlScraper]
+    c.plugins.plugins = [Cinch::Plugins::UrlScraper]
   end
 end
 
