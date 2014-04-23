@@ -151,7 +151,7 @@ module Cinch
               
               m.reply Format(:green, "URL Scraping for #{m.channel} is now #{@url ? 'enabled' : 'disabled'}!")
               
-              @bot.debug("#{self.class.name} → #{config[:enabled_channels].inspect}");
+              @bot.debug("#{self.class.name} => #{config[:enabled_channels].inspect}");
               
               config[:enabled_channels]=nil if config[:enabled_channels]==[]
               
