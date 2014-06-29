@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'cinch-url-scraper'
-  s.version     = '1.2.1'
+  s.version     = '1.3.0'
   s.summary     =
   s.description = 'A Cinch plugin to get information about posted URLs.'
   s.licenses    = ['LGPLv3']
