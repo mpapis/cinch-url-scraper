@@ -127,6 +127,11 @@ module Cinch
               else
                 m.reply "Broken twitter link: %s (at %s)" % [ title, uri.host ] if title
               end
+
+            when "isup.me"
+              container = page.search("//div[@id='container']")
+              m.reply "#{container.children[0].to_s.strip} #{uri.path[1..-1]} #{container.children[2].to_s.strip}"
+
             else
               m.reply "Title: %s (at %s)" % [ title, uri.host ] if title
             end
