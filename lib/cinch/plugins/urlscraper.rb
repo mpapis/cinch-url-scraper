@@ -71,7 +71,7 @@ module Cinch
               page = @agent.get(link + "&nofeather=True")
 
               # Get page hits
-              hits = page.search("//span[@class='watch-view-count ']")
+              hits = page.search("//span[@class='watch-view-count yt-uix-hovercard-target']")
               hits = hits.text.gsub(/[.,]/, ",")
 
               # Get likes
@@ -82,7 +82,7 @@ module Cinch
               dislikes = page.search("//span[@class='dislikes-count']")
               dislikes = dislikes.text.gsub(/[.,]/, ",")
 
-              m.reply "#{m.user.nick}'s YT Title: %s (Views: %s, Likes: %s || Dislikes: %s)" % [
+              m.reply "#{m.user.nick}'s YT Title: %s (Views: %s - Likes: %s || Dislikes: %s)" % [
                 title, hits.strip, likes.strip, dislikes.strip
               ]
               
