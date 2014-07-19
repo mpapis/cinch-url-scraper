@@ -71,7 +71,7 @@ module Cinch
               page = @agent.get(link + "&nofeather=True")
 
               # Get page hits
-              hits = page.search("//span[@class='watch-view-count yt-uix-hovercard-target']")
+              hits = page.search("//div[@id='watch7-views-info']//div[@class='watch-view-count']")
               hits = hits.text.gsub(/[.,]/, ",")
 
               # Get likes
